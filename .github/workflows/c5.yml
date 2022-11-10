@@ -42,45 +42,17 @@ jobs:
       uses: actions/checkout@main
 
     - name: Initialization environment
-    env:
-    
-    - name: Load Custom Variables
-    run: |
-        if [ -n "${{ github.event.inputs.Tempoary_CONFIG }}" ]
-        then
-            if [ -f "$GITHUB_WORKSPACE/Configs/${{ github.event.inputs.Tempoary_CONFIG }}" ]
-            then
-                CONFIG_FILE=${{ github.event.inputs.Tempoary_CONFIG }}
-            else
-                CONFIG_FILE=${{ env.CONFIG_FILE }}
-            fi
-        else
-            CONFIG_FILE=${{ env.CONFIG_FILE }}
-        fi
-        if [ ! -f "$GITHUB_WORKSPACE/Configs/$CONFIG_FILE" ]
-        then
-            echo "CONFIG_FILE: [/Config/$CONFIG_FILE] is not detected ..."
-            exit 1
-        else
-            echo "CONFIG_FILE: [/Config/$CONFIG_FILE]"
-            echo "CONFIG_FILE=$CONFIG_FILE" >> $GITHUB_ENV
-        fi
-        if [ -n "${{ github.event.inputs.Tempoary_IP }}" ]
-        then
-            echo "IP: [${{ github.event.inputs.Tempoary_IP }}]"
-            echo "Tempoary_IP=${{ github.event.inputs.Tempoary_IP }}" >> $GITHUB_ENV
-        fi
-        if [ -n "${{ github.event.inputs.Tempoary_FLAG }}" ]
-        then
-            echo "FLAG: [${{ github.event.inputs.Tempoary_FLAG }}]"
-            echo "Tempoary_FLAG=${{ github.event.inputs.Tempoary_FLAG }}" >> $GITHUB_ENV
-        fi
-        REPO_URL="https://github.com/$(cut -d \: -f 1 <<< ${{ env.DEFAULT_SOURCE }})"
-        REPO_BRANCH=$(cut -d \: -f 2 <<< ${{ env.DEFAULT_SOURCE }})
-        echo "REPO_URL=$REPO_URL" >> $GITHUB_ENV
-        echo "REPO_BRANCH=$REPO_BRANCH" >> $GITHUB_ENV
-        echo "Compile_Date=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-        echo "Display_Date=$(date +%Y/%m/%d)" >> $GITHUB_ENV
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo -E apt-get -qq update
+        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
+        sudo -E apt-get -qq autoremove --purge
+        sudo -E apt-get -qq clean
+        sudo timedatectl set-timezone "$TZ"
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
         
     - name: Clone source code
       working-directory: /workdir
