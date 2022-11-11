@@ -17,5 +17,5 @@
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 #git clone https://github.com/MrH723/openwrt-packages.git package/openwrt-packages
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
-echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+#echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+#echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
