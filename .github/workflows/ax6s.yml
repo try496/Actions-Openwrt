@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt
+name: xiaomi-ax6s
 
 on:
   repository_dispatch:
