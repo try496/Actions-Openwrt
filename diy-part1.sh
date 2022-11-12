@@ -14,10 +14,7 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-sed -i '$a src-git ssrp https://github.com/fw876/helloworld' feeds.conf.default
-# OpenClash
-git clone https://github.com/vernesong/OpenClash.git package/kleinersource/OpenClash
-# Xiaorouji Passwall
-# sed -i '$a src-git xiaorouji https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
-sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git' feeds.conf.default
-sed -i '$a src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall.git;packages' feeds.conf.default
+echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+#echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+echo "src-git small https://github.com/kenzok8/small" >> feeds.conf.default
+echo "src-git others https://github.com/kenzok8/openwrt-packages" >> feeds.conf.default
