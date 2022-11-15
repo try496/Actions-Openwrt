@@ -30,7 +30,7 @@ CONFIG_PACKAGE_6rd=y
 CONFIG_PACKAGE_6to4=y
 
 # 固件
-CONFIG_PACKAGE_i915-firmware=y
+
 
 # 内核模块
 CONFIG_PACKAGE_kmod-fs-xfs=y
@@ -38,7 +38,6 @@ CONFIG_PACKAGE_kmod-fs-btrfs=y
 CONFIG_PACKAGE_kmod-fs-cifs=y
 CONFIG_PACKAGE_kmod-fs-nfs-v3=y
 CONFIG_PACKAGE_kmod-fs-nfs-v4=y
-CONFIG_PACKAGE_kmod-drm-i915=y
 
 # USB 驱动程序
 CONFIG_PACKAGE_kmod-usb-net=y
@@ -54,12 +53,11 @@ CONFIG_PACKAGE_kmod-usb-ohci-pci=y
 CONFIG_PACKAGE_kmod-usb3=y
 
 # Wireless 驱动程序
-CONFIG_PACKAGE_kmod-mt7921e=y
-CONFIG_PACKAGE_kmod-mt7921u=y
-CONFIG_PACKAGE_kmod-mac80211=y
+# CONFIG_PACKAGE_kmod-mt7921e=y
+# CONFIG_PACKAGE_kmod-mt7921u=y
+# CONFIG_PACKAGE_kmod-mac80211=y
 
 # LUCI Appliciations
-CONFIG_PACKAGE_luci-app-argon-config=y
 CONFIG_PACKAGE_luci-app-adbyby-plus=y
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-autoupdate=y
@@ -81,30 +79,8 @@ CONFIG_DOCKER_CGROUP_OPTIONS=y
 CONFIG_DOCKER_NET_MACVLAN=y
 CONFIG_DOCKER_OPTIONAL_FEATURES=y
 CONFIG_PACKAGE_luci-app-hd-idle=y
-# CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
-CONFIG_PACKAGE_luci-app-iperf3-server=y
-# CONFIG_PACKAGE_luci-app-jd-dailybonus is not set
-# CONFIG_PACKAGE_luci-app-netdata is not set
 CONFIG_PACKAGE_luci-app-nft-qos=y
 CONFIG_PACKAGE_luci-app-nfs=y
-CONFIG_PACKAGE_luci-app-natter=y
-CONFIG_PACKAGE_luci-app-npc=y
-CONFIG_PACKAGE_luci-app-openclash=y
-CONFIG_PACKAGE_luci-app-onliner=y
-CONFIG_PACKAGE_luci-app-passwall=y
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria=y
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_NaiveProxy is not set
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server=y
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server=y
-CONFIG_PACKAGE_luci-app-passwall_Simple_Obfs=y
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray_Plugin is not set
 CONFIG_PACKAGE_luci-app-pptp-server=y
 CONFIG_PACKAGE_luci-app-qbittorrent=y
 # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
@@ -113,11 +89,9 @@ CONFIG_PACKAGE_luci-app-qbittorrent_static=y
 # CONFIG_PACKAGE_luci-app-rclone_INCLUDE_fuse-utils is not set
 # CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-ng is not set
 # CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
-CONFIG_PACKAGE_luci-app-serverchan=y
 # CONFIG_PACKAGE_luci-app-sqm is not set
 CONFIG_PACKAGE_luci-app-samba=y
 # CONFIG_PACKAGE_luci-app-samba4 is not set
-CONFIG_PACKAGE_luci-app-shutdown=y
 CONFIG_PACKAGE_luci-app-ssrserver-python=y
 CONFIG_PACKAGE_luci-app-softethervpn=y
 CONFIG_PACKAGE_luci-app-syncdial=y
@@ -141,10 +115,9 @@ CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go=y
 # CONFIG_PACKAGE_luci-app-xlnetacc is not set
 CONFIG_PACKAGE_luci-app-wrtbwmon=y
 CONFIG_PACKAGE_luci-app-wireguard=y
-CONFIG_PACKAGE_luci-app-webd=y
 CONFIG_PACKAGE_luci-app-zerotier=y
 
-# SSR PLUS+
+# VPN
 CONFIG_PACKAGE_luci-app-ssr-plus=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
@@ -180,12 +153,28 @@ CONFIG_PACKAGE_shadowsocks-libev-ss-server=y
 # CONFIG_PACKAGE_shadowsocks-rust-ssservice is not set
 # CONFIG_PACKAGE_shadowsocks-rust-ssurl is not set
 
-# Themes
-CONFIG_PACKAGE_luci-theme-argon=y
-CONFIG_PACKAGE_luci-theme-neobird=y
+CONFIG_PACKAGE_luci-app-passwall=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_NaiveProxy is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server=y
+CONFIG_PACKAGE_luci-app-passwall_Simple_Obfs=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray_Plugin is not set
+
+CONFIG_PACKAGE_luci-app-openclash=y
+
+# 主题
+# TCONFIG_PACKAGE_luci-theme-argon=y
+# TCONFIG_PACKAGE_luci-theme-neobird=y
 
 # 其他 Appliciations
-# CONFIG_PACKAGE_autosamba is not set
 CONFIG_PACKAGE_bash=y
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_cfdisk=y
