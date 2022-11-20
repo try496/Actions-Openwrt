@@ -11,11 +11,9 @@ CONFIG_KERNEL_IPV6=y
 CONFIG_PACKAGE_ipv6helper=y
 CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
 
-# Wireless 驱动程序(开源)
-# CONFIG_PACKAGE_kmod-mt7615e is not set
+# Wireless 驱动程序
+CONFIG_PACKAGE_luci-app-mtwifi=n
 
-# Wireless 驱动程序(闭源)
-CONFIG_DEFAULT_kmod-mt7615d_dbdc=y
 # 软件
 CONFIG_PACKAGE_luci-app-ddns=y
 CONFIG_PACKAGE_ddns-scripts_aliyun=y
@@ -25,7 +23,7 @@ CONFIG_PACKAGE_ddns-scripts_no-ip_com=y
 CONFIG_PACKAGE_luci-app-filetransfer=y
 CONFIG_PACKAGE_luci-app-nlbwmon=y
 CONFIG_PACKAGE_luci-app-ttyd=y
-CONFIG_PACKAGE_luci-app-turboacc=
+CONFIG_PACKAGE_luci-app-turboacc=y
 CONFIG_PACKAGE_Include-BBR-CCA=n
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-webadmin=y
