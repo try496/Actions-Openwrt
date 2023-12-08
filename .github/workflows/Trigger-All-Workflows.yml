@@ -1,0 +1,20 @@
+name: Trigger-All-Workflows  # 主要工作流的名称
+
+on:
+  workflow_dispatch:  # 手动触发：通过 GitHub UI 来触发
+  schedule:
+    - cron: 0 20 * * 5  # 北京时间星期六凌晨4点，定时触发
+
+jobs:
+
+    Qualcomm-IPQ6018-nss:
+      uses: ./.github/workflows/Qualcomm-IPQ6018-nss.yml
+
+    Qualcomm-IPQ6018:
+      uses: ./.github/workflows/Qualcomm-IPQ6018.yml
+
+    MediaTek-MT7621:
+      uses: ./.github/workflows/MediaTek-MT7621.yml
+
+    All-Clean:
+      uses: ./.github/workflows/All-Clean.yml
