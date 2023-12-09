@@ -4,16 +4,6 @@ git clone https://github.com/messense/aliyundrive-webdav.git -b main package/app
 # wechatpush
 git clone https://github.com/tty228/luci-app-wechatpush.git package/apps/luci-app-wechatpush
 
-# msd_lite
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-msd_lite package/apps/luci-app-msd_lite
-svn co https://github.com/kiddin9/openwrt-packages/trunk/msd_lite package/apps/msd_lite
-
-# cpufreq
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-cpufreq package/apps/luci-app-cpufreq
-
-# zerotier
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-zerotier package/apps/luci-app-zerotier
-
 # openclash
 # git clone --single-branch --depth 1 -b dev https://github.com/vernesong/OpenClash.git package/apps/luci-app-openclash
 
@@ -24,13 +14,13 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-zerotier packa
 # rm -rf package/passwall_package
 
 # 时间服务器
-sed -i 's/0.openwrt.pool.ntp.org/ntp1.aliyun.com/g' package/base-files/files/bin/config_generate
-sed -i 's/1.openwrt.pool.ntp.org/ntp2.aliyun.com/g' package/base-files/files/bin/config_generate
-sed -i 's/2.openwrt.pool.ntp.org/time1.cloud.tencent.com/g' package/base-files/files/bin/config_generate
-sed -i 's/3.openwrt.pool.ntp.org/time2.cloud.tencent.com/g' package/base-files/files/bin/config_generate
+sed -i 's/0.openwrt.pool.ntp.org/cn.ntp.org.cn/g' package/base-files/files/bin/config_generate
+sed -i 's/1.openwrt.pool.ntp.org/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
+sed -i 's/2.openwrt.pool.ntp.org/ntp.aliyun.com/g' package/base-files/files/bin/config_generate
+sed -i 's/3.openwrt.pool.ntp.org/ntp.tencent.com/g' package/base-files/files/bin/config_generate
 
 # 修改固件版本信息
-sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='$(date +"%Y年%m月%d"日)-SNAPSHOT'/g" package/base-files/files/etc/openwrt_release
+sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt $(date +"%Y-%m-%d")-Build'/g" package/base-files/files/etc/openwrt_release
 
 # TTYD自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
@@ -41,25 +31,35 @@ sed -i '/root/c\root:$1$3INQuMmE$eyGe2r1bt96nb2Oqm.oaQ1:19563:0:99999:7:::' pack
 # 修改IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
+# 修改IPv6 端口号
+sed -i 's/\[::\]:80/\[::\]:8060/g' package/network/services/uhttpd/files/uhttpd.config
+
 # 修改时区
 sed -i "s/timezone='.*'/timezone='CST-8'/g" ./package/base-files/files/bin/config_generate
 sed -i "/timezone='.*'/a\\\t\t\set system.@system[-1].zonename='Asia/Shanghai'" ./package/base-files/files/bin/config_generate
 
-#4.编译的固件文件名添加日期
+# 修改诊断网址
+rm -rf feeds/luci/modules/luci-mod-network/root/etc/uci-defaults/50_luci-mod-admin-full
+sed -i "s/openwrt.org/cloud.tencent.com/g" feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/diagnostics.js
+
+# 编译的固件文件名添加日期
 sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=$(shell TZ=CST-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
 
+# 配置中科大软件源
+sed -i 's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g' include/version.mk
+
 # argon
-git clone https://github.com/jerrykuku/luci-theme-argon.git package/apps/luci-theme-argon
+# git clone https://github.com/jerrykuku/luci-theme-argon.git package/apps/luci-theme-argon
 # 移除底部文字
-pushd  package/apps/luci-theme-argon/luasrc/view/themes/argon
-sed -i '/<a class=\"luci-link\" href=\"https:\/\/github.com\/openwrt\/luci\"/d' footer.htm
-sed -i '/<a href=\"https:\/\/github.com\/jerrykuku\/luci-theme-argon\"/d' footer.htm
-sed -i '/<%= ver.distversion %>/d' footer.htm
+# pushd  package/apps/luci-theme-argon/luasrc/view/themes/argon
+# sed -i '/<a class=\"luci-link\" href=\"https:\/\/github.com\/openwrt\/luci\"/d' footer.htm
+# sed -i '/<a href=\"https:\/\/github.com\/jerrykuku\/luci-theme-argon\"/d' footer.htm
+# sed -i '/<%= ver.distversion %>/d' footer.htm
 # 移除 footer_login.htm 底部文字
-sed -i '/<a class=\"luci-link\" href=\"https:\/\/github.com\/openwrt\/luci\"/d' footer_login.htm
-sed -i '/<a href=\"https:\/\/github.com\/jerrykuku\/luci-theme-argon\"/d' footer_login.htm
-sed -i '/<%= ver.distversion %>/d' footer_login.htm
-popd
+# sed -i '/<a class=\"luci-link\" href=\"https:\/\/github.com\/openwrt\/luci\"/d' footer_login.htm
+# sed -i '/<a href=\"https:\/\/github.com\/jerrykuku\/luci-theme-argon\"/d' footer_login.htm
+# sed -i '/<%= ver.distversion %>/d' footer_login.htm
+# popd
 # bootstrap底部文字
 pushd  feeds/luci/themes/luci-theme-bootstrap/ucode/template/themes/bootstrap
 sed -i -e '/<span>/,/<\/span>/d' footer.ut
@@ -74,3 +74,19 @@ sed -i 's|admin/status|admin/vpn|g' feeds/luci/protocols/luci-proto-wireguard/ro
 sed -i 's/"阿里云盘 WebDAV"/"阿里云盘"/g' `grep "阿里云盘 WebDAV" -rl ./`
 sed -i 's/"CPU 性能优化调节"/"性能优化"/g' $(grep "CPU 性能优化调节设置" -rl ./)
 sed -i 's/"动态 DNS(DDNS)"/"动态 DNS"/g' $(grep "动态 DNS(DDNS)" -rl ./)
+
+# 拉取指定软件包
+function merge_package(){
+    trap 'rm -rf "$tmpdir"' EXIT
+    branch="$1" curl="$2" && shift 2
+    rootdir="$PWD"
+    localdir=package/apps
+    [ -d "$localdir" ] || mkdir -p "$localdir"
+    tmpdir="$(mktemp -d)" || exit 1
+    git clone -b "$branch" --depth 1 --filter=blob:none --sparse "$curl" "$tmpdir"
+    cd "$tmpdir"
+    git sparse-checkout init --cone
+    git sparse-checkout set "$@"
+    mv -f "$@" "$rootdir"/"$localdir" && cd "$rootdir"
+}
+merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq luci-app-zerotier luci-app-msd_lite msd_lite

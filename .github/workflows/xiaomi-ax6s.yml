@@ -17,8 +17,8 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt.git
-  REPO_BRANCH: openwrt-23.05
-  CONFIG_FILE: configs/xiaomi-ax6s.config
+  REPO_BRANCH: master
+  CONFIG_FILE: configs/xiaomi-ax6s
   DIY_SCRIPT: openwrt.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
@@ -112,8 +112,8 @@ jobs:
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+        [ "UPLOAD_COWTRANSFER" == "true" ] && echo " [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
+        [ "$UPLOAD_WETRANSFER" == "true" ] && echo " [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
     
     - name: 上传固件到Releases

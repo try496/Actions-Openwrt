@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: zn_m2_qsdk
+name: zn_m2_opemwrt
 
 on:
   repository_dispatch:
@@ -16,10 +16,10 @@ on:
     inputs:
 
 env:
-  REPO_URL: https://github.com/sdf8057/ipq6000.git
-  REPO_BRANCH: master
-  CONFIG_FILE: config/zn_m2_qsdk.config
-  DIY_SCRIPT: openwrt_19.07.sh
+  REPO_URL: https://github.com/try496/openwrt.git
+  REPO_BRANCH: ipq6000
+  CONFIG_FILE: config/zn_m2_opemwrt
+  DIY_SCRIPT: openwrt.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -112,8 +112,8 @@ jobs:
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+        [ "UPLOAD_COWTRANSFER" == "true" ] && echo " [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
+        [ "$UPLOAD_WETRANSFER" == "true" ] && echo " [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
     
     - name: 上传固件到Releases
