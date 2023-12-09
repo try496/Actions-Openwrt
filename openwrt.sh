@@ -30,7 +30,7 @@ sed -i 's/2.openwrt.pool.ntp.org/time1.cloud.tencent.com/g' package/base-files/f
 sed -i 's/3.openwrt.pool.ntp.org/time2.cloud.tencent.com/g' package/base-files/files/bin/config_generate
 
 # 修改固件版本信息
-sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='$(date +"%Y年%m月%d"日)-SNAPSHOT'/g" package/base-files/files/etc/openwrt_release
+sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='$(date +"%Y-%m-%d")-Build'/g" package/base-files/files/etc/openwrt_release
 
 # TTYD自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
@@ -40,6 +40,9 @@ sed -i '/root/c\root:$1$3INQuMmE$eyGe2r1bt96nb2Oqm.oaQ1:19563:0:99999:7:::' pack
 
 # 修改IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+
+# 修改IPv6 端口号
+sed -i 's/\[::\]:80/\[::\]:8060/g' package/network/services/uhttpd/files/uhttpd.config
 
 # 修改时区
 sed -i "s/timezone='.*'/timezone='CST-8'/g" ./package/base-files/files/bin/config_generate
