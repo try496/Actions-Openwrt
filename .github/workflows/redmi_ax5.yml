@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: newifi-d2
+name: redmi_ax5
 
 on:
   repository_dispatch:
@@ -18,7 +18,7 @@ on:
 env:
   REPO_URL: https://github.com/try496/openwrt.git
   REPO_BRANCH: build
-  CONFIG_FILE: config/newifi-d2
+  CONFIG_FILE: config/redmi_ax5
   DIY_SCRIPT: openwrt.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
