@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: zn_m2_qsdk
+name: ipq60xx-opemwrt
 
 on:
   repository_dispatch:
@@ -16,10 +16,10 @@ on:
     inputs:
 
 env:
-  REPO_URL: https://github.com/sdf8057/ipq6000.git
-  REPO_BRANCH: master
-  CONFIG_FILE: config/zn_m2_qsdk
-  DIY_SCRIPT: zn-m2.sh
+  REPO_URL: https://github.com/try496/openwrt.git
+  REPO_BRANCH: build
+  CONFIG_FILE: config/ipq60xx-opemwrt
+  DIY_SCRIPT: openwrt.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -30,7 +30,7 @@ jobs:
 
     steps:
     - name: 检查分支
-      uses: actions/checkout@v3
+      uses: actions/checkout@main
 
     - name: 编译环境
       env:
@@ -117,7 +117,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
     
     - name: 上传固件到Releases
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@master
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -127,7 +127,7 @@ jobs:
         files: ${{ env.FIRMWARE }}/*
         
     - name: 清理Releases
-      uses: dev-drprasad/delete-older-releases@v0.2.1
+      uses: dev-drprasad/delete-older-releases@master
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 6
