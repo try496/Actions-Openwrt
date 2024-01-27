@@ -1,3 +1,19 @@
+# 拉取指定软件包
+function merge_package(){
+    trap 'rm -rf "$tmpdir"' EXIT
+    branch="$1" curl="$2" && shift 2
+    rootdir="$PWD"
+    localdir=package/apps
+    [ -d "$localdir" ] || mkdir -p "$localdir"
+    tmpdir="$(mktemp -d)" || exit 1
+    git clone -b "$branch" --depth 1 --filter=blob:none --sparse "$curl" "$tmpdir"
+    cd "$tmpdir"
+    git sparse-checkout init --cone
+    git sparse-checkout set "$@"
+    mv -f "$@" "$rootdir"/"$localdir" && cd "$rootdir"
+}
+merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq luci-app-zerotier luci-app-msd_lite msd_lite
+
 # aliyundrive-webdav
 git clone https://github.com/messense/aliyundrive-webdav.git -b main package/apps/aliyundrive-webdav
 
@@ -65,6 +81,8 @@ pushd  feeds/luci/themes/luci-theme-bootstrap/ucode/template/themes/bootstrap
 sed -i -e '/<span>/,/<\/span>/d' footer.ut
 popd
 
+sed -i 's/PATCHVER:=5.15/PATCHVER:=6.1/g' target/linux/ramips/Makefile
+
 # 修改菜单
 sed -i 's|admin/services|admin/|g' feeds/luci/applications/luci-app-nlbwmon/root/usr/share/luci/menu.d/*.json
 sed -i 's|admin/services|admin/system|g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
@@ -73,20 +91,3 @@ sed -i 's|admin/status|admin/vpn|g' feeds/luci/protocols/luci-proto-wireguard/ro
 # 修改插件名字
 sed -i 's/"阿里云盘 WebDAV"/"阿里云盘"/g' `grep "阿里云盘 WebDAV" -rl ./`
 sed -i 's/"CPU 性能优化调节"/"性能优化"/g' $(grep "CPU 性能优化调节设置" -rl ./)
-sed -i 's/"动态 DNS(DDNS)"/"动态 DNS"/g' $(grep "动态 DNS(DDNS)" -rl ./)
-
-# 拉取指定软件包
-function merge_package(){
-    trap 'rm -rf "$tmpdir"' EXIT
-    branch="$1" curl="$2" && shift 2
-    rootdir="$PWD"
-    localdir=package/apps
-    [ -d "$localdir" ] || mkdir -p "$localdir"
-    tmpdir="$(mktemp -d)" || exit 1
-    git clone -b "$branch" --depth 1 --filter=blob:none --sparse "$curl" "$tmpdir"
-    cd "$tmpdir"
-    git sparse-checkout init --cone
-    git sparse-checkout set "$@"
-    mv -f "$@" "$rootdir"/"$localdir" && cd "$rootdir"
-}
-merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq luci-app-zerotier luci-app-msd_lite msd_lite

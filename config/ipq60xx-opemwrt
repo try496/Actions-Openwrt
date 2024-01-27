@@ -1,6 +1,7 @@
 CONFIG_TARGET_qualcommax=y
 CONFIG_TARGET_qualcommax_ipq60xx=y
 CONFIG_TARGET_MULTI_PROFILE=y
+CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_redmi_ax5=y
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_zn_m2=y
 
 # 无线开关
