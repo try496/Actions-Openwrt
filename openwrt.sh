@@ -12,7 +12,7 @@ function merge_package(){
     git sparse-checkout set "$@"
     mv -f "$@" "$rootdir"/"$localdir" && cd "$rootdir"
 }
-merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq luci-app-zerotier luci-app-msd_lite msd_lite
+merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq cpufreq luci-app-zerotier luci-app-msd_lite msd_lite 
 
 # aliyundrive-webdav
 git clone https://github.com/messense/aliyundrive-webdav.git -b main package/apps/aliyundrive-webdav
@@ -80,8 +80,6 @@ sed -i 's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g' include/version.
 pushd  feeds/luci/themes/luci-theme-bootstrap/ucode/template/themes/bootstrap
 sed -i -e '/<span>/,/<\/span>/d' footer.ut
 popd
-
-sed -i 's/PATCHVER:=5.15/PATCHVER:=6.1/g' target/linux/ramips/Makefile
 
 # 修改菜单
 sed -i 's|admin/services|admin/|g' feeds/luci/applications/luci-app-nlbwmon/root/usr/share/luci/menu.d/*.json
