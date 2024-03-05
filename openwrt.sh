@@ -12,7 +12,7 @@ function merge_package(){
     git sparse-checkout set "$@"
     mv -f "$@" "$rootdir"/"$localdir" && cd "$rootdir"
 }
-merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq luci-app-zerotier luci-app-msd_lite msd_lite
+merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq cpufreq luci-app-zerotier luci-app-msd_lite msd_lite 
 
 # aliyundrive-webdav
 git clone https://github.com/messense/aliyundrive-webdav.git -b main package/apps/aliyundrive-webdav

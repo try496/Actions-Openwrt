@@ -1,14 +1,16 @@
 #
-# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+# https://github.com/P3TERX/Actions-OpenWrt
+#
+# File: .github/workflows/openwrt-bulder.yml
+# Description: Build OpenWrt using GitHub Actions
+#
+# Copyright (c) 2019-2024 P3TERX <https://p3terx.com>
 #
 # This is free software, licensed under the MIT License.
 # See /LICENSE for more information.
 #
-# https://github.com/P3TERX/Actions-OpenWrt
-# Description: Build OpenWrt using GitHub Actions
-#
 
-name: IPQ4.4
+name: Redmi-AX5
 
 on:
   repository_dispatch:
@@ -18,7 +20,7 @@ on:
 env:
   REPO_URL: https://github.com/try496/openwrt.git
   REPO_BRANCH: build
-  CONFIG_FILE: config/IPQ4.4.config
+  CONFIG_FILE: config/Redmi-AX5.config
   DIY_SCRIPT: openwrt.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
