@@ -1,14 +1,16 @@
 #
-# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+# httpsgithub.comP3TERXActions-OpenWrt
+#
+# File .githubworkflowsopenwrt-bulder.yml
+# Description Build OpenWrt using GitHub Actions
+#
+# Copyright (c) 2019-2024 P3TERX httpsp3terx.com
 #
 # This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
-# https://github.com/P3TERX/Actions-OpenWrt
-# Description: Build OpenWrt using GitHub Actions
+# See LICENSE for more information.
 #
 
-name: Newifi-D2
+name: ZN-M2
 
 on:
   repository_dispatch:
@@ -18,7 +20,7 @@ on:
 env:
   REPO_URL: https://github.com/try496/openwrt.git
   REPO_BRANCH: build
-  CONFIG_FILE: config/Newifi-D2
+  CONFIG_FILE: config/ZN-M2
   DIY_SCRIPT: openwrt.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
