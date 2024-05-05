@@ -17,7 +17,7 @@ on:
 
 env:
   REPO_URL: https://github.com/try496/openwrt.git
-  REPO_BRANCH: build
+  REPO_BRANCH: openwrt-23.05
   CONFIG_FILE: config/Newifi-D2.config
   DIY_SCRIPT: openwrt.sh
   UPLOAD_BIN_DIR: false
