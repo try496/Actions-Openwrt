@@ -21,7 +21,7 @@ env:
   REPO_URL: https://github.com/try496/openwrt.git
   REPO_BRANCH: build
   CONFIG_FILE: config/ZN-M2.config
-  DIY_SCRIPT: openwrt.sh
+  DIY_SCRIPT: zn.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
