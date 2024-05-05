@@ -12,7 +12,7 @@ function merge_package(){
     git sparse-checkout set "$@"
     mv -f "$@" "$rootdir"/"$localdir" && cd "$rootdir"
 }
-merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq cpufreq luci-app-zerotier luci-app-msd_lite msd_lite luci-app-ddns-go ddns-go
+merge_package master https://github.com/kiddin9/openwrt-packages luci-app-cpufreq cpufreq luci-app-zerotier luci-app-ddns-go ddns-go
 
 # wechatpush
 git clone https://github.com/tty228/luci-app-wechatpush.git package/apps/luci-app-wechatpush
@@ -42,7 +42,7 @@ sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.
 sed -i '/root/c\root:$1$3INQuMmE$eyGe2r1bt96nb2Oqm.oaQ1:19563:0:99999:7:::' package/base-files/files/etc/shadow
 
 # 修改IP
-sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generate
 
 # 修改IPv6 端口号
 sed -i 's/\[::\]:80/\[::\]:8060/g' package/network/services/uhttpd/files/uhttpd.config
