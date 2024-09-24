@@ -33,7 +33,7 @@ sed -i 's/2.openwrt.pool.ntp.org/cn.ntp.org.cn/g' package/base-files/files/bin/c
 sed -i 's/3.openwrt.pool.ntp.org/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
 
 # 修改固件版本信息
-sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt $(date +"%Y-%m-%d")-Build'/g" package/base-files/files/etc/openwrt_release
+sed -i "s/OPENWRT_RELEASE=.*/OPENWRT_RELEASE='OpenWrt-24.10 $(date +"%Y-%m-%d")-Build'/g" package/base-files/files/usr/lib/os-release
 
 # 编译的固件文件名添加日期
 sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=$(shell TZ=CST-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
@@ -44,8 +44,8 @@ sed -i '/root/c\root:$1$3INQuMmE$eyGe2r1bt96nb2Oqm.oaQ1:19563:0:99999:7:::' pack
 # 修改IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
-# 修改IPv6 端口号
-sed -i 's/\[::\]:80/\[::\]:8060/g' package/network/services/uhttpd/files/uhttpd.config
+# 修改 IPv6 端口号
+# sed -i 's/\[::\]:80/\[::\]:8060/g' package/network/services/uhttpd/files/uhttpd.config
 
 # 修改时区
 sed -i "s/timezone='.*'/timezone='CST-8'/g" ./package/base-files/files/bin/config_generate
@@ -55,8 +55,26 @@ sed -i "/timezone='.*'/a\\\t\t\set system.@system[-1].zonename='Asia/Shanghai'" 
 rm -rf feeds/luci/modules/luci-mod-network/root/etc/uci-defaults/50_luci-mod-admin-full
 sed -i "s/openwrt.org/cloud.tencent.com/g" feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/diagnostics.js
 
-# 配置中科大软件源
-sed -i 's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g' include/version.mk
+# 配置阿里云软件源
+sed -i 's/downloads.openwrt.org/mirrors.aliyun.com\/openwrt/g' include/version.mk
+
+# 修改菜单
+sed -i 's|admin/services|admin/|g' feeds/luci/applications/luci-app-nlbwmon/root/usr/share/luci/menu.d/*.json
+sed -i 's|admin/services|admin/system|g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
+sed -i 's|admin/status|admin/vpn|g' feeds/luci/protocols/luci-proto-wireguard/root/usr/share/luci/menu.d/luci-proto-wireguard.json
+
+# 修改插件名字
+sed -i 's/"性能优化"/"性能优化"/g' $(grep "CPU 性能优化调节设置" -rl ./)
+
+# 修改 nginx ipv6 端口号
+pushd feeds/packages/net/nginx-util/files
+sed -i 's/\[::\]:80/\[::\]:8060/g' nginx.config
+popd
+
+# 修改日志格式
+pushd feeds/packages/admin/syslog-ng/files
+sed -zi 's/destination messages {\n[[:space:]]*file("\/var\/log\/messages");\n};/destination messages {\n#       file("\/var\/log\/messages");\n        file("\/var\/log\/messages" suppress(5) template("\${R_YEAR}-\${R_MONTH}-\${R_DAY} \${R_HOUR}:\${R_MIN}:\${R_SEC} \${PRIORITY} \${PROGRAM}[\${PID}]: \${MSGONLY}\\n"));\n};/' syslog-ng.conf
+popd
 
 # argon
 # git clone https://github.com/jerrykuku/luci-theme-argon.git package/apps/luci-theme-argon
@@ -74,11 +92,3 @@ sed -i 's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g' include/version.
 pushd  feeds/luci/themes/luci-theme-bootstrap/ucode/template/themes/bootstrap
 sed -i -e '/<span>/,/<\/span>/d' footer.ut
 popd
-
-# 修改菜单
-sed -i 's|admin/services|admin/|g' feeds/luci/applications/luci-app-nlbwmon/root/usr/share/luci/menu.d/*.json
-sed -i 's|admin/services|admin/system|g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
-sed -i 's|admin/status|admin/vpn|g' feeds/luci/protocols/luci-proto-wireguard/root/usr/share/luci/menu.d/luci-proto-wireguard.json
-
-# 修改插件名字
-sed -i 's/"性能优化"/"性能优化"/g' $(grep "CPU 性能优化调节设置" -rl ./)

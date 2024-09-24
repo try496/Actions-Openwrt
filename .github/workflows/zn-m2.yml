@@ -19,7 +19,7 @@ on:
 
 env:
   REPO_URL: https://github.com/try496/openwrt.git
-  REPO_BRANCH: build
+  REPO_BRANCH: openwrt-24.10
   CONFIG_FILE: config/ZN-M2.config
   DIY_SCRIPT: zn.sh
   UPLOAD_BIN_DIR: false
