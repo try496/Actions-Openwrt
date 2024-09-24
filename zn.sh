@@ -20,11 +20,6 @@ git clone https://github.com/tty228/luci-app-wechatpush.git package/apps/luci-ap
 # openclash
 # git clone --single-branch --depth 1 -b dev https://github.com/vernesong/OpenClash.git package/apps/luci-app-openclash
 
-# mosdns
-rm -rf feeds/packages/net/v2ray-geodata
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/apps/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/apps/v2ray-geodata
-
 # passwall
 # git clone https://github.com/xiaorouji/openwrt-passwall-packages.git -b main package/passwall_package
 # git clone https://github.com/xiaorouji/openwrt-passwall.git -b main package/passwall
@@ -51,6 +46,10 @@ sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generat
 
 # 修改IPv6 端口号
 sed -i 's/\[::\]:80/\[::\]:8060/g' package/network/services/uhttpd/files/uhttpd.config
+
+# 调整CPU频率
+sed -i '49s/0x3/0xf/;56s/0x3/0xf/' target/linux/qualcommax/patches-6.6/0054-v6.8-arm64-dts-qcom-ipq6018-use-CPUFreq-NVMEM.patch
+sed -i '39s/0x3/0xf/;47s/0x3/0xf/' target/linux/qualcommax/patches-6.6/0910-arm64-dts-qcom-ipq6018-change-voltage-to-perf-levels.patch
 
 # 修改时区
 sed -i "s/timezone='.*'/timezone='CST-8'/g" ./package/base-files/files/bin/config_generate

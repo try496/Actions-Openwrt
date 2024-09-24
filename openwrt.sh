@@ -20,11 +20,6 @@ git clone https://github.com/tty228/luci-app-wechatpush.git package/apps/luci-ap
 # openclash
 # git clone --single-branch --depth 1 -b dev https://github.com/vernesong/OpenClash.git package/apps/luci-app-openclash
 
-# mosdns
-rm -rf feeds/packages/net/v2ray-geodata
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/apps/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/apps/v2ray-geodata
-
 # passwall
 # git clone https://github.com/xiaorouji/openwrt-passwall-packages.git -b main package/passwall_package
 # git clone https://github.com/xiaorouji/openwrt-passwall.git -b main package/passwall
