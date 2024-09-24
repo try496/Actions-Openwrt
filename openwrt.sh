@@ -56,7 +56,7 @@ rm -rf feeds/luci/modules/luci-mod-network/root/etc/uci-defaults/50_luci-mod-adm
 sed -i "s/openwrt.org/cloud.tencent.com/g" feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/diagnostics.js
 
 # 配置中科大软件源
-sed -i 's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g' include/version.mk
+sed -i 's/downloads.openwrt.org/mirrors.aliyun.com\/openwrt/g' include/version.mk
 
 # argon
 # git clone https://github.com/jerrykuku/luci-theme-argon.git package/apps/luci-theme-argon
