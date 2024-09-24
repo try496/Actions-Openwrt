@@ -33,7 +33,7 @@ sed -i 's/2.openwrt.pool.ntp.org/cn.ntp.org.cn/g' package/base-files/files/bin/c
 sed -i 's/3.openwrt.pool.ntp.org/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
 
 # 修改固件版本信息
-sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt $(date +"%Y-%m-%d")-Build'/g" package/base-files/files/etc/openwrt_release
+sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt $(date +"%Y-%m-%d")-Build'/g" package/base-files/files/usr/lib/os-release
 
 # 编译的固件文件名添加日期
 sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=$(shell TZ=CST-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
@@ -56,7 +56,7 @@ rm -rf feeds/luci/modules/luci-mod-network/root/etc/uci-defaults/50_luci-mod-adm
 sed -i "s/openwrt.org/cloud.tencent.com/g" feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/diagnostics.js
 
 # 配置中科大软件源
-sed -i 's/downloads.openwrt.org/mirrors.ustc.edu.cn\/openwrt/g' include/version.mk
+sed -i 's/downloads.openwrt.org/mirrors.aliyun.com\/openwrt/g' include/version.mk
 
 # argon
 # git clone https://github.com/jerrykuku/luci-theme-argon.git package/apps/luci-theme-argon
