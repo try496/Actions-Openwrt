@@ -12,18 +12,13 @@ function merge_package(){
     git sparse-checkout set "$@"
     mv -f "$@" "$rootdir"/"$localdir" && cd "$rootdir"
 }
-merge_package main https://github.com/try496/openwrt-packages luci-app-cpufreq cpufreq luci-app-zerotier luci-app-msd_lite msd_lite luci-app-ddns-go ddns-go
+merge_package main https://github.com/try496/openwrt-packages luci-app-cpufreq cpufreq luci-app-msd_lite msd_lite luci-app-ddns-go ddns-go
 
 # wechatpush
 git clone https://github.com/tty228/luci-app-wechatpush.git package/apps/luci-app-wechatpush
 
 # openclash
 # git clone --single-branch --depth 1 -b dev https://github.com/vernesong/OpenClash.git package/apps/luci-app-openclash
-
-# mosdns
-rm -rf feeds/packages/net/v2ray-geodata
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/apps/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/apps/v2ray-geodata
 
 # passwall
 # git clone https://github.com/xiaorouji/openwrt-passwall-packages.git -b main package/passwall_package
