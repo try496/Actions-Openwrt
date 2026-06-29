@@ -22,15 +22,15 @@ git clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/apps/OpenW
 sed -i 's|admin/services|admin/vpn|g' package/apps/OpenWrt-nikki/luci-app-nikki/root/usr/share/luci/menu.d/luci-app-nikki.json
 
 # openclash
-git clone https://github.com/vernesong/OpenClash.git package/apps/openclash
-sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/apps//openclash/luci-app-openclash/luasrc/*.lua
-sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
-sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/view/openclash/*.htm
+# git clone https://github.com/vernesong/OpenClash.git package/apps/openclash
+# sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/controller/*.lua
+# sed -i 's/services/vpn/g' package/apps//openclash/luci-app-openclash/luasrc/*.lua
+# sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
+# sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/view/openclash/*.htm
 
 # homeproxy
-git clone https://github.com/immortalwrt/homeproxy.git package/apps/homeproxy
-sed -i 's|admin/services|admin/vpn|g' package/apps/homeproxy/root/usr/share/luci/menu.d/luci-app-homeproxy.json
+# git clone https://github.com/immortalwrt/homeproxy.git package/apps/homeproxy
+# sed -i 's|admin/services|admin/vpn|g' package/apps/homeproxy/root/usr/share/luci/menu.d/luci-app-homeproxy.json
 
 # airoha-npu
 git clone https://github.com/bingoguo93/luci-app-airoha-npu package/apps/luci-app-airoha-npu
@@ -75,41 +75,6 @@ sed -i 's/"性能优化"/"性能优化"/g' $(grep "CPU 性能优化调节设置"
 pushd  feeds/luci/themes/luci-theme-bootstrap/ucode/template/themes/bootstrap
 sed -i -e '/<span>/,/<\/span>/d' footer.ut
 popd
-
-# 创建文件
-cat > openwrt/target/linux/airoha/dts/an7581-small-buffers-common.dtsi <<'EOF'
-// SPDX-License-Identifier: GPL-2.0-only OR MIT
-
-/* Reduced from 10MB (0xa00000) to 1MB */
-&npu_binary {
-	reg = <0x0 0x84000000 0x0 0x100000>;
-};
-
-/* Reduced from 32MB (0x2000000) to 2MB */
-&qdma0_buf {
-	reg = <0x0 0x87000000 0x0 0x200000>;
-};
-
-/* Reduced from 16MB (0x1000000) to 1MB */
-&qdma1_buf {
-	reg = <0x0 0x89000000 0x0 0x100000>;
-};
-
-/* Reduced from 44MB (0x2c00000) to 2MB */
-&npu_pkt {
-	reg = <0x0 0x8a000000 0x0 0x200000>;
-};
-
-/* Reduced from 64MB (0x4000000) to 1MB */
-&npu_txpkt {
-	reg = <0x0 0x8cc00000 0x0 0x100000>;
-};
-EOF
-
-# 第二行插入
-sed -i '2i#include "an7581-small-buffers-common.dtsi"' \
-openwrt/target/linux/airoha/dts/an7581-nokia_xg-040g-md-ubi.dts
-
 
 # argon
 # git clone https://github.com/jerrykuku/luci-theme-argon.git package/apps/luci-theme-argon
