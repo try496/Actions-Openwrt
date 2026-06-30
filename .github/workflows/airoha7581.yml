@@ -7,7 +7,7 @@ on:
   #   - cron: 0 20 * * *
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_URL: https://github.com/openwrt/openwrt.git
   REPO_BRANCH: main
   CONFIG_FILE: config/airoha7581.config
   GENERAL_CONFIG_FILE: config/General.config

@@ -22,11 +22,11 @@ git clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/apps/OpenW
 sed -i 's|admin/services|admin/vpn|g' package/apps/OpenWrt-nikki/luci-app-nikki/root/usr/share/luci/menu.d/luci-app-nikki.json
 
 # openclash
-# git clone https://github.com/vernesong/OpenClash.git package/apps/openclash
-# sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/controller/*.lua
-# sed -i 's/services/vpn/g' package/apps//openclash/luci-app-openclash/luasrc/*.lua
-# sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
-# sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/view/openclash/*.htm
+ git clone https://github.com/vernesong/OpenClash.git package/apps/openclash
+ sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/controller/*.lua
+ sed -i 's/services/vpn/g' package/apps//openclash/luci-app-openclash/luasrc/*.lua
+ sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
+ sed -i 's/services/vpn/g' package/apps/openclash/luci-app-openclash/luasrc/view/openclash/*.htm
 
 # homeproxy
 # git clone https://github.com/immortalwrt/homeproxy.git package/apps/homeproxy
@@ -42,7 +42,7 @@ sed -i 's/2.openwrt.pool.ntp.org/cn.ntp.org.cn/g' package/base-files/files/bin/c
 sed -i 's/3.openwrt.pool.ntp.org/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
 
 # 修改固件版本信息
-sed -i "s/OPENWRT_RELEASE=.*/OPENWRT_RELEASE='OpenWrt-$(date +"%Y-%m-%d")-Build'/g" package/base-files/files/usr/lib/os-release
+sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ $(date +"%Y-%m-%d")-Build')/g" $(find ./feeds/luci/modules/luci-mod-status/ -type f -name "10_system.js")
 
 # 编译的固件文件名添加日期
 sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=$(shell TZ=CST-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
